@@ -2,32 +2,24 @@
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
     <div class="menu_section">
-        <h3>General</h3>
+        <h3>Navigation</h3>
         <ul class="nav side-menu">
-            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-            <li><a><i class="fa fa-edit"></i> DropDown <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu" style="display: none">
-                    <li><a href="#">Item</a>
+            @foreach(config('admintemplate.side_links') as $category)
+                    <li>
+                        <a @if(!isset($category['child'])) href=" {{ URL::to($category['url']) }}"@endif>
+                            <i class="fa {{ $category['icon'] }}"></i> {{ $category['name'] }}
+
+                            @if(isset($category['child'])) <span class="fa fa-chevron-down"></span> @endif
+                        </a>
+                        @if(isset($category['child']))
+                            <ul class="nav child_menu" style="display: none">
+                                @foreach($category['child'] as $child)
+                                    <li><a href="{{ URL::to($child['url']) }}">{{ $child['name'] }}</a></li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </li>
-                    <li><a href="#">Item 2</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <div class="menu_section">
-        <h3>Secondary Menu</h3>
-        <ul class="nav side-menu">
-            <li><a><i class="fa fa-windows"></i> Example <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu" style="display: none">
-                    <li><a href="#">Example</a>
-                    </li>
-                    <li><a href="#">Example</a>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="#"><i class="fa fa-laptop"></i> Single Item <span class="label label-success pull-right">Hey!</span></a>
-            </li>
+            @endforeach
         </ul>
     </div>
 
