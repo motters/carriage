@@ -10,9 +10,17 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 /**
  * Application routes
+ *
+ * @protected via auth login
  */
-Route::get('/dashboard', function () {
-    return view('vendor.manchesterTemplate.dashboard');
+Route::group(['middleware' => 'auth'], function () {
+
+    //Dashboard
+    Route::get('/dashboard', function () {
+        return view('vendor.manchesterTemplate.dashboard');
+    });
+
+
 });
 
 

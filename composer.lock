@@ -747,12 +747,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/MU-Electronics/admin-template.git",
-                "reference": "79b41620ebecea710b9a12f13ab8706d16db1817"
+                "reference": "53fbd5e53b703f94973b1ce559d0ceed148cb5ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MU-Electronics/admin-template/zipball/79b41620ebecea710b9a12f13ab8706d16db1817",
-                "reference": "79b41620ebecea710b9a12f13ab8706d16db1817",
+                "url": "https://api.github.com/repos/MU-Electronics/admin-template/zipball/53fbd5e53b703f94973b1ce559d0ceed148cb5ea",
+                "reference": "53fbd5e53b703f94973b1ce559d0ceed148cb5ea",
                 "shasum": ""
             },
             "require": {
@@ -787,7 +787,7 @@
                 "theme",
                 "university"
             ],
-            "time": "2015-08-18 09:29:23"
+            "time": "2015-11-02 19:05:31"
         },
         {
             "name": "nesbot/carbon",
