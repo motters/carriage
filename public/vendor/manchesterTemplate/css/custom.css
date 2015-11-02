@@ -3231,7 +3231,6 @@ select.parsley-error {
     width: auto;
 }
 
-//----
 .daterangepicker .daterangepicker_start_input label,
 .daterangepicker .daterangepicker_end_input label {
     color: #333;
@@ -3308,7 +3307,6 @@ select.parsley-error {
     border: none;
 }
 
-//----
 .daterangepicker.single .ranges,
 .daterangepicker.single .calendar {
     float: none;
@@ -5313,7 +5311,7 @@ ul.project_files li a i {
     right: 0;
     bottom: 0;
     left: 0;
-    background: #fff url("../img/loading.gif") no-repeat center center;
+    background: #fff url("../images/loading.gif") no-repeat center center;
     opacity: .75;
     filter: alpha(opacity=75);
     z-index: 20140628;
@@ -5857,7 +5855,8 @@ form:after {
     border: 1px solid #A878AF;
     outline: none;
 }
-}
+
+
 #username { background-position: 10px 10px !important }
 #password { background-position: 10px -53px !important }
 .login_content form div a {
@@ -5999,7 +5998,7 @@ header{width:100%;}
   display: inline-block;
   width: 20px;
   height: 20px;
-  background-image: url("../../assets/img/icons.png");
+  background-image: url("../images/icons.png");
   vertical-align: middle;
 }
 
