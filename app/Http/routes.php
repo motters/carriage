@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('vendor.manchesterTemplate.dashboard');
 });
+
+
+Route::get('/login', function () {
+    return view('vendor.manchesterTemplate.login')
+                ->withLogin(URL::to('login'));
+});
