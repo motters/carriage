@@ -24,8 +24,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('hubs/{id}/edit', 'Hub\Hub@edit');
     Route::get('hubs/add', 'Hub\Hub@add');
     Route::get('hubs/{id}', 'Hub\HubView@index');
-    Route::post('hubs/edit/{id}', 'Hub\Hub@editPost');
-    Route::post('hubs/add', 'Hub\Hub@addPost');
+    Route::post('hubs/create', 'Hub\Hub@addPost');
+    Route::put('hubs/{id}', 'Hub\Hub@editPost');
+    Route::delete('hubs/{id}', 'Hub\Hub@delete');
 
 
     // Users
@@ -33,8 +34,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('users/add', 'Users\User@add');
     Route::get('users/{id}/edit', 'Users\User@edit');
     Route::get('profile', 'Users\User@profile');
-    Route::post('users/add', 'Users\User@addPost');
-    Route::post('users/{id}/edit', 'Users\User@editPost');
+    Route::post('users/create', 'Users\User@addPost');
+    Route::put('users/{id}', 'Users\User@editPost');
+    Route::delete('users/{id}', 'Users\User@delete');
 
 
     // Settings

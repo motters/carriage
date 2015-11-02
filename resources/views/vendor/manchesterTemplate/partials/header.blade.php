@@ -26,6 +26,8 @@
 
     <script src="{{ URL::to('vendor/manchesterTemplate/js/jquery.min.js') }}"></script>
 
+    <link href="{{ URL::to('vendor/manchesterTemplate/css/datatables/tools/css/dataTables.tableTools.css') }}" rel="stylesheet">
+
     <!--[if lt IE 9]>
     <script src="{{ URL::to('vendor/manchesterTemplate/js/ie8-responsive-file-warning.js') }}"></script>
     <![endif]-->

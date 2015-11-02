@@ -1,4 +1,5 @@
 <script src="{{ URL::to('vendor/manchesterTemplate/js/bootstrap.min.js') }}"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
 
 <!-- chart js -->
 <script src="{{ URL::to('vendor/manchesterTemplate/js/chartjs/chart.min.js') }}"></script>
@@ -13,4 +14,7 @@
 <!-- moris js -->
 <script src="{{ URL::to('vendor/manchesterTemplate/js/moris/raphael-min.js') }}"></script>
 <script src="{{ URL::to('vendor/manchesterTemplate/js/moris/morris.js') }}"></script>
-<script src="{{ URL::to('vendor/manchesterTemplate/js/moris/example.js') }}"></script>
+
+
+<script src="{{ URL::to('vendor/manchesterTemplate/js/datatables/js/jquery.dataTables.js') }}"></script>
+<script src="{{ URL::to('vendor/manchesterTemplate/js/datatables/tools/js/dataTables.tableTools.js') }}"></script>
