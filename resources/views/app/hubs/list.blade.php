@@ -17,6 +17,7 @@
                 <div class="x_panel" style="height:600px;">
                     <div class="x_title">
                         <h2>List Hub</h2>
+                        <a href="{{ URL::to('hubs/add') }}" class="btn btn-primary btn-sm" style="float: right;">Add New</a>
                         <div class="clearfix"></div>
                     </div>
                     <table id="example" class="table table-striped responsive-utilities jambo_table">
