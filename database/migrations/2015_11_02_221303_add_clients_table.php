@@ -15,6 +15,7 @@ class AddClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->string('client', 250)->index();
+            $table->string('archive')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

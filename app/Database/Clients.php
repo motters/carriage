@@ -35,5 +35,13 @@ class Clients extends Model{
     {
         return $this->hasMany('App\Database\Hubs');
     }
-    
+
+    /**
+     * Is the client archived?
+     */
+    public function isArchived()
+    {
+        if($this->archived)
+            return true;
+    }
 }

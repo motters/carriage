@@ -34,7 +34,7 @@ class Hubs extends Model{
      */
     public function client()
     {
-        return $this->hasOne('App\Database\Client');
+        return $this->hasOne('App\Database\Clients', 'id', 'client_id');
     }
 
 

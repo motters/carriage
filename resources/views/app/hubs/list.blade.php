@@ -31,30 +31,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr class="even pointer">
-                                <td>1</td>
-                                <td>Standard-A-1</td>
-                                <td>Northern Rail</td>
-                                <td><a href="{{ URL::to('hubs/1') }}">View</a></td>
-                                <td><a href="{{ URL::to('hubs/1/edit') }}">Edit</a></td>
-                                <td class="last"><a href="#">Delete</a></td>
-                            </tr>
-                            <tr class="even pointer">
-                                <td>2</td>
-                                <td>Deluxe-D-55</td>
-                                <td>Virgin Trains</td>
-                                <td><a href="{{ URL::to('hubs/1') }}">View</a></td>
-                                <td><a href="{{ URL::to('hubs/1/edit') }}">Edit</a></td>
-                                <td class="last"><a href="#">Delete</a></td>
-                            </tr>
-                            <tr class="even pointer">
-                                <td>3</td>
-                                <td>Mid-C-11</td>
-                                <td>Pennine Express</td>
-                                <td><a href="{{ URL::to('hubs/1') }}">View</a></td>
-                                <td><a href="{{ URL::to('hubs/1/edit') }}">Edit</a></td>
-                                <td class="last"><a href="#">Delete</a></td>
-                            </tr>
+                            @foreach(App\Database\Hubs::all() as $hub)
+                                <tr class="even pointer">
+                                    <td>{{ $hub->id }}</td>
+                                    <td>{{ $hub->carriage_name }}</td>
+                                    <td>{{ $hub->client->client }}</td>
+                                    <td><a href="{{ URL::to('hubs/'.$hub->id) }}">View</a></td>
+                                    <td><a href="{{ URL::to('hubs/'.$hub->id.'/edit') }}">Edit</a></td>
+                                    <td class="last"><a href="#">Delete</a></td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
