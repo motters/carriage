@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span></label>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Description <span class="required">*</span></label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             {!! Form::textarea('carriage_desc', null,['required' => 'true', 'placeholder' => 'Carriage Description', 'class' => 'form-control col-md-7 col-xs-12']) !!}
                                         </div>
