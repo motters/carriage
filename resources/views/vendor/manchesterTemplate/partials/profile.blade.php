@@ -1,7 +1,7 @@
 <!-- menu prole quick info -->
 <div class="profile">
     <div class="profile_info">
-        <h2>{{ trans('manchesterTemplate::template.welcome_user', ['user'=>'USER HERE']) }}</h2>
+        <h2>{{ trans('manchesterTemplate::template.welcome_user', ['user'=>Auth::user()->name]) }}</h2>
         <span>{{ trans(config('admintemplate.lang_service')) }}</span>
     </div>
 </div>
