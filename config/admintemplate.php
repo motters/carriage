@@ -1,7 +1,7 @@
 <?php
 
 
- return [
+ return array(
 
      /**
       *  Configure template language locations
@@ -26,5 +26,5 @@
       *  Registration view
       */
      'show_registration_form' => false,
-     'show_registration_message' => 'Please request access from the relivent member of staff',
- ];
+     'show_registration_message' => 'Please request access from the relevant member of staff',
+ );

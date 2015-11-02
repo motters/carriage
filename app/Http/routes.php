@@ -17,7 +17,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Dashboard
     Route::get('/dashboard', function () {
-        return view('vendor.manchesterTemplate.dashboard');
+        return view('app.dashboard')->withPage('Dashboard');
     });
 
 

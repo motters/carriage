@@ -15,6 +15,7 @@ class UserTableSeeder extends Seeder
             'name' => 'sam mottley',
             'email' => 'sammottley@gmail.com',
             'password' => bcrypt('secret'),
+            'remember_token' => str_random(10),
         ]);
     }
 }
