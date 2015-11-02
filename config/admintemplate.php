@@ -48,7 +48,7 @@
              'name'=>'Users',
              'icon' => 'fa-user',
              'child' => [
-                 'List Users' => ['name'=>'List Users', 'url'=>'user'],
+                 'List Users' => ['name'=>'List Users', 'url'=>'users'],
                  'Add New User' => ['name'=>'Add New User', 'url'=>'users/add']
              ],
          ],
