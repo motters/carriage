@@ -24,6 +24,7 @@ var add_hub = {
             ) {
                 // Ensure sub hub not already added
                 if(add_hub.subHubNotExsits($("input[name=sub_api_key]").val()) != false){
+                    $("#sub-hub-val-failed").hide();
                     $("#sub-hubs").append( add_hub.subHubCreatePanel() );
                     add_hub.subHubAddToVar();
                     add_hub.subHubClearFields();
@@ -39,10 +40,11 @@ var add_hub = {
     },
 
     subHubCreatePanel: function(){
-        return "<div class='x_panel' id='"+$("input[name=sub_api_key]").val()+"'> <div class='x_title'><h2>Sub Hub ("+$("input[name=sub_api_key]").val()+"...)</h2><ul class='nav navbar-right panel_toolbox' style='min-width: 25px;'><li><a class='show-content'><i class='fa fa-chevron-up'></i></a></li><li><a class='delete-sub-hub'><i class='fa fa-close'></i></a></li></ul><div class='clearfix'></div></div><div class='x_content' style='display: none;'>API Key: "+$("input[name=sub_api_key]").val()+"<br/>API Enc: "+$("input[name=sub_api_enc]").val()+"<br/>API User: "+$("input[name=sub_api_pass]").val()+"<br/></div></div>";
+        return "<div class='x_panel' id='"+$("input[name=sub_api_key]").val()+"'> <div class='x_title'><h2>Sub Hub ("+$("input[name=sub_name]").val()+"...)</h2><ul class='nav navbar-right panel_toolbox' style='min-width: 25px;'><li><a class='show-content'><i class='fa fa-chevron-up'></i></a></li><li><a class='delete-sub-hub'><i class='fa fa-close'></i></a></li></ul><div class='clearfix'></div></div><div class='x_content' style='display: none;'>API Key: "+$("input[name=sub_api_key]").val()+"<br/>API Enc: "+$("input[name=sub_api_enc]").val()+"<br/>API User: "+$("input[name=sub_api_pass]").val()+"<br/></div></div>";
     },
 
     subHubClearFields: function(){
+        $("input[name=sub_name]").val("");
         $("input[name=sub_api_key]").val("");
         $("input[name=sub_api_enc]").val("");
         $("input[name=sub_api_user]").val("");
@@ -65,12 +67,15 @@ var add_hub = {
 
     subHubAddToVar: function(){
         var subHub = {}
+        subHub["name"] = $("input[name=sub_name]").val();
         subHub["api_key"] = $("input[name=sub_api_key]").val();
         subHub["api_enc"] = $("input[name=sub_api_enc]").val();
         subHub["api_user"] = $("input[name=sub_api_user]").val();
         subHub["api_pass"] = $("input[name=sub_api_pass]").val();
 
         add_hub.subHubs.push(subHub);
+
+        add_hub.updateModuleDropDown();
     },
 
     subHubDeleteFromVar: function(api){
@@ -78,6 +83,7 @@ var add_hub = {
         add_hub.subHubs = data.filter(function (find) {
             return find.api_key !== api;
         });
+        add_hub.updateModuleDropDown();
     },
 
     subHubNotExsits: function(api){
@@ -93,6 +99,18 @@ var add_hub = {
 
     subHubJSON: function(){
         // return JSON.stringify(add_hub.subHubs);
+    },
+
+    updateModuleDropDown: function(){
+        var data = add_hub.subHubs;
+        $('#sub_hubs').empty().append('<option value="">Please Select</option>');
+        $.each(data, function(key, value){
+            $('#sub_hubs').append($('<option>', {
+                value: data[key]["api_key"],
+                text: data[key]["name"]
+            }));
+        });
+        console.log(data);
     }
 }
 

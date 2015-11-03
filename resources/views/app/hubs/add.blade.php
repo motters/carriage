@@ -120,6 +120,12 @@
                                                 <strong>Woops!</strong> Please ensure that all the fields are fill in below and are correct!
                                             </div>
                                             <div class="form-group">
+                                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="carriage_name">Sub Ref Name<span class="required">*</span></label>
+                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                    {!! Form::text('sub_name', null,['required' => 'true', 'placeholder' => 'Sub Hub Referance', 'class' => 'form-control col-md-7 col-xs-12']) !!}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="carriage_name">Sub API Key<span class="required">*</span></label>
                                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                                     {!! Form::text('sub_api_key', null,['required' => 'true', 'placeholder' => 'Sub Hub API Key', 'class' => 'form-control col-md-7 col-xs-12']) !!}
@@ -161,7 +167,7 @@
                                             <div class="form-group">
                                                 <label for="client" class="control-label col-md-4 col-sm-4 col-xs-12">Sub Hub <span class="required">*</span></label>
                                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                                    {!! Form::select('sub_hub', [], null,['required' => 'true', 'class' => 'form-control col-md-7 col-xs-12']) !!}
+                                                    {!! Form::select('sub_hubs', [''=>'Please Select'], null,['required' => 'true', 'class' => 'form-control col-md-7 col-xs-12', 'id' => 'sub_hubs']) !!}
                                                 </div>
                                             </div>
                                             <div class="form-group">
