@@ -121,7 +121,12 @@ var add_hub = {
     },
 
     deleteModulesWithNoParent: function(api){
-        
+        var data = add_hub.modules;
+        add_hub.modules = data.filter(function (find) {
+            if(find.sub_hub == api){ $("#"+find.name).remove();}
+            return find.sub_hub !== api;
+        });
+        console.log(add_hub.modules);
     },
 
     addModule: function(){
