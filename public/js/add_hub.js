@@ -2,7 +2,7 @@
  * This class controls the adding / configuration of hubs
  *
  * @author Sam Mottley
- */
+ */ 
 
 var add_hub = {
 
