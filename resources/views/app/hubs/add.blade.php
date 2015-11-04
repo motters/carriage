@@ -6,7 +6,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Administration / Hubs / Add Hub</h3>
+                <h5>Administration / Hubs / Add Hub</h5>
             </div>
         </div>
         <div class="clearfix"></div>

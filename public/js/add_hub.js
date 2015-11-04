@@ -126,7 +126,6 @@ var add_hub = {
             if(find.sub_hub == api){ $("#"+find.name).remove();}
             return find.sub_hub !== api;
         });
-        console.log(add_hub.modules);
     },
 
     addModule: function(){
