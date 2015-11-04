@@ -8,9 +8,17 @@ var add_hub = {
 
     subHubs: [],
 
+    modules: [],
+
     init: function(){
         // Check for adding of sub hub
         this.addSubHub();
+
+        // Check for adding modules
+        this.addModule();
+
+        // Show desc when user wants
+        add_hub.openDesc();
     },
 
     addSubHub: function(){
@@ -35,7 +43,6 @@ var add_hub = {
                 $("#sub-hub-val-failed").show();
             }
         });
-        add_hub.subHubOpenDesc();
         add_hub.subHubDelete();
     },
 
@@ -51,7 +58,7 @@ var add_hub = {
         $("input[name=sub_api_pass]").val("");
     },
 
-    subHubOpenDesc: function(){
+    openDesc: function(){
         $( document  ).on('click', '.show-content', function() {
             $("#"+$( this ).parents().eq(3).attr("id")+" .x_content").toggle();
         });
@@ -84,6 +91,7 @@ var add_hub = {
             return find.api_key !== api;
         });
         add_hub.updateModuleDropDown();
+        add_hub.deleteModulesWithNoParent(api);
     },
 
     subHubNotExsits: function(api){
@@ -110,8 +118,66 @@ var add_hub = {
                 text: data[key]["name"]
             }));
         });
-        console.log(data);
-    }
+    },
+
+    deleteModulesWithNoParent: function(api){
+        
+    },
+
+    addModule: function(){
+        $( "#add-module" ).click(function() {
+            // Validate fields (@todo improve validation later - Sam Mottley)
+            if (
+                ($("input[name=module_name]").val().length > 0) &&
+                ($("input[name=module_interval]").val().length > 0)
+            ) {
+                // Ensure sub hub not already added
+                $("#module-val-failed").hide();
+                $("#sub-hub-modules").append( add_hub.moduleCreatePanel() );
+                add_hub.modulesAddToVar();
+                add_hub.moduleClearFields();
+
+            }else{
+                $("#module-val-failed").show();
+            }
+        });
+        add_hub.moduleDelete();
+    },
+
+    moduleClearFields: function(){
+        $("input[name=module_name]").val("");
+        $("input[name=module_interval]").val("");
+    },
+
+    moduleCreatePanel: function(){
+        return "<div class='x_panel' id='"+$("input[name=module_name]").val()+"'> <div class='x_title'><h2>Module ("+$("input[name=module_name]").val()+"...)</h2><ul class='nav navbar-right panel_toolbox' style='min-width: 25px;'><li><a class='show-content'><i class='fa fa-chevron-up'></i></a></li><li><a class='delete-sub-hub'><i class='fa fa-close'></i></a></li></ul><div class='clearfix'></div></div><div class='x_content' style='display: none;'>" +
+                "Modules: "+$("select[name=modules] option:selected").text()+"<br/>Sub Hubs: "+$("select[name=sub_hubs] option:selected").text()+"<br/>Module Interval: "+$("input[name=module_interval]").val()+"<br/></div></div>";
+    },
+
+    moduleDelete: function(){
+        $( document  ).on('click', '.delete-sub-hub', function() {
+            var name = $( this ).parents().eq(3).attr("id");
+            $("#"+name).remove();
+            add_hub.modulesDeleteFromVar(name);
+        });
+    },
+
+    modulesAddToVar: function(){
+        var modules = {}
+        modules["name"] = $("input[name=module_name]").val();
+        modules["sub_hub"] = $( "select[name=sub_hubs]" ).val();
+        modules["module"] = $( "select[name=modules]" ).val();
+        modules["interval"] = $("input[name=module_interval]").val();
+
+        add_hub.modules.push(modules);
+    },
+
+    modulesDeleteFromVar: function(name){
+        var data = add_hub.modules;
+        add_hub.modules = data.filter(function (find) {
+            return find.name !== name;
+        });
+    },
 }
 
 $(document).ready(function () {

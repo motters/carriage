@@ -23,7 +23,6 @@
 
 
                         <!-- Smart Wizard -->
-                        <p>Please follow the wizard step by step to add a new carriage hub.</p>
                         <div id="wizard" class="form_wizard wizard_horizontal">
                             <ul class="wizard_steps">
                                 <li>
@@ -40,7 +39,7 @@
                                         <span class="step_no">2</span>
                                                     <span class="step_descr">
                                             Step 2<br />
-                                            <small>API Details</small>
+                                            <small>Hub API Details</small>
                                         </span>
                                     </a>
                                 </li>
@@ -49,7 +48,7 @@
                                         <span class="step_no">3</span>
                                                     <span class="step_descr">
                                             Step 3<br />
-                                            <small>Module Settings</small>
+                                            <small>Carriage Setup</small>
                                         </span>
                                     </a>
                                 </li>
@@ -122,7 +121,7 @@
                                             <div class="form-group">
                                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="carriage_name">Sub Ref Name<span class="required">*</span></label>
                                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                                    {!! Form::text('sub_name', null,['required' => 'true', 'placeholder' => 'Sub Hub Referance', 'class' => 'form-control col-md-7 col-xs-12']) !!}
+                                                    {!! Form::text('sub_name', null,['required' => 'true', 'placeholder' => 'Sub Hub Reference', 'class' => 'form-control col-md-7 col-xs-12']) !!}
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -155,9 +154,18 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6 well">
+                                        <div id="sub-hub-modules"></div>
                                         <h4>Add Modules to Sub Hubs</h4>
-                                        <div class="sub-hub-modules"></div>
                                         <div class="add-sub-hub-module form-horizontal form-label-left">
+                                            <div class="alert alert-danger alert-dismissible fade in" role="alert" id="module-val-failed" style="display: none;">
+                                                <strong>Woops!</strong> Please ensure that all the fields are fill in below and are correct!
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="carriage_name">Sub Ref Name<span class="required">*</span></label>
+                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                    {!! Form::text('module_name', null,['required' => 'true', 'placeholder' => 'Module Reference', 'class' => 'form-control col-md-7 col-xs-12']) !!}
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="carriage_name">Module<span class="required">*</span></label>
                                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -177,7 +185,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <button id="add-sub-hub" class="btn btn-success" style="float:right;">Add Module</button>
+                                                <button id="add-module" class="btn btn-success" style="float:right;">Add Module</button>
                                             </div>
                                         </div>
                                     </div>
