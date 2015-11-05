@@ -204,17 +204,6 @@
 
 
 @section('js_bottom')
-        <!-- form wizard -->
-    <script type="text/javascript" src="{{ URL::to('js/add_hub.js') }}"></script>
     <script type="text/javascript" src="{{ URL::to('vendor/manchesterTemplate/js/wizard/jquery.smartWizard.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Smart Wizard
-            $('#wizard').smartWizard();
-            function onFinishCallback() {
-                $('#wizard').smartWizard('showMessage', 'Finish Clicked');
-                //alert('Finish Clicked');
-            }
-        });
-    </script>
+    <script type="text/javascript" src="{{ URL::to('js/add_hub.js') }}"></script>
 @stop

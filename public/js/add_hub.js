@@ -73,7 +73,7 @@ var add_hub = {
     },
 
     subHubAddToVar: function(){
-        var subHub = {}
+        var subHub = {};
         subHub["name"] = $("input[name=sub_name]").val();
         subHub["api_key"] = $("input[name=sub_api_key]").val();
         subHub["api_enc"] = $("input[name=sub_api_enc]").val();
@@ -171,7 +171,7 @@ var add_hub = {
     },
 
     modulesAddToVar: function(){
-        var modules = {}
+        var modules = {};
         modules["name"] = $("input[name=module_name]").val();
         modules["sub_hub"] = $( "select[name=sub_hubs]" ).val();
         modules["module"] = $( "select[name=modules]" ).val();
@@ -196,9 +196,52 @@ var add_hub = {
         });
 
         return passed;
+    },
+
+    onFinishCallback: function(){
+        // Submit data here
+        //if(validateAllSteps()){
+         //   $('form').submit();
+        //}
+    },
+
+    leaveAStepCallback: function(obj){
+        var step_num = obj.attr('rel');
+        // return validateSteps(step_num);
+        return true;
+    },
+
+    validateStepOne: function(){
+
+
+    },
+
+    validateStepTwo: function(){
+
+
+    },
+
+    validateStepThree: function(){
+
+
+    },
+
+    validateStep: function(step){
+
+    },
+
+    validateAllSteps: function(){
+
+
     }
 }
 
 $(document).ready(function () {
+
+    // Init control JS
     add_hub.init();
+
+    // Start the wizard
+    $('#wizard').smartWizard({onLeaveStep:add_hub.leaveAStepCallback, onFinish:add_hub.onFinishCallback, enableFinishButton:true});
+
 });
