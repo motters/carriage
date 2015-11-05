@@ -200,39 +200,103 @@ var add_hub = {
 
     onFinishCallback: function(){
         // Submit data here
-        //if(validateAllSteps()){
-         //   $('form').submit();
-        //}
+        if(add_hub.validateAllSteps()){
+            var data = {
+                sub_hubs: add_hub.subHubs,
+                modules: add_hub.modules,
+                carriage_name: $("input[name=carriage_name]").val(),
+                carriage_client: $("select[name=client] option:selected").val(),
+                carriage_desc: $('textarea[name="carriage_desc"]').val(),
+                hub_api_key: $("input[name=hub_api_key]").val(),
+                hub_api_enc: $("input[name=hub_api_enc]").val(),
+                hub_api_user: $("input[name=hub_api_user]").val(),
+                hub_api_pass: $("input[name=hub_api_pass]").val(),
+                _token: $("input[name=_token]").val()
+            };
+
+            // @todo improve reporting of errors - Sam Mottley
+            var post = $.post( "./create", data, function() {
+            }).done(function(returned) {
+                if($.isNumeric(returned)){
+                    window.location.replace("./"+returned+"/edit");
+                }else{
+                    alert( "There seems to be a technical error, please refresh your page and try again." );
+                }
+            }).fail(function() {
+                alert( "There seems to be a technical error, please refresh your page and try again." );
+            });
+
+
+        }
     },
 
     leaveAStepCallback: function(obj){
-        var step_num = obj.attr('rel');
-        // return validateSteps(step_num);
+        var step = obj.attr('rel');
+        return add_hub.validateStep(step);
         return true;
     },
 
     validateStepOne: function(){
-
-
+        // @todo improve validation - Sam Mottley
+        if( $("input[name=carriage_name]").val() == '' ||
+            $("select[name=client] option:selected").val() == '' ||
+            $('textarea[name="carriage_desc"]').val() == ''
+        ){
+            $("#step-one-valid-failed").show();
+            return false
+        }
+        $("#step-one-valid-failed").hide();
+        return true;
     },
 
     validateStepTwo: function(){
-
-
+        // @todo improve validation - Sam Mottley
+        if( $("input[name=hub_api_key]").val() == '' ||
+            $("input[name=hub_api_enc]").val() == '' ||
+            $("input[name=hub_api_user]").val() == '' ||
+            $("input[name=hub_api_pass]").val() == ''
+        ){
+            $("#step-two-valid-failed").show();
+            return false
+        }
+        $("#step-two-valid-failed").hide();
+        return true;
     },
 
     validateStepThree: function(){
-
-
+        // @todo improve validation - Sam Mottley
+        if($.isEmptyObject(this.subHubs)){
+            $("#sub-module-failed").show();
+            return false
+        }
+        $("#sub-module-failed").hide();
+        return true;
     },
 
     validateStep: function(step){
-
+        switch(step)
+        {
+            case '1':
+                return add_hub.validateStepOne();
+                break;
+            case '2':
+                return add_hub.validateStepTwo();
+                break;
+            case '3':
+                return add_hub.validateStepThree();
+                break;
+        }
     },
 
     validateAllSteps: function(){
+        if( add_hub.validateStepOne() == false ||
+            add_hub.validateStepTwo() == false ||
+            add_hub.validateStepThree() == false
+        ){
+            return false;
+        }
 
-
+        return true;
     }
 }
 

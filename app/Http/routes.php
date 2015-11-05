@@ -26,8 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('hubs', 'Hub\Hub@index');
     Route::get('hubs/{id}/edit', 'Hub\Hub@edit');
     Route::get('hubs/add', 'Hub\Hub@add');
-    Route::get('hubs/{id}', 'Hub\HubView@index');
-    Route::post('hubs/create', 'Hub\Hub@addPost');
+    Route::get('hubs/{id}/view', 'Hub\HubView@index');
+    Route::post('hubs/create', 'Hub\Hub@create');
     Route::put('hubs/{id}', 'Hub\Hub@editPost');
     Route::delete('hubs/{id}', 'Hub\Hub@delete');
 

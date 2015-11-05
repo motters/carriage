@@ -45,8 +45,10 @@ class Hub extends \App\Http\Controllers\Controller
      * Perform a add carriage hub
      *
      */
-    public function addPost()
+    public function create()
     {
+        // return id of new hub
+        return 4;
     }
 
 
@@ -54,7 +56,7 @@ class Hub extends \App\Http\Controllers\Controller
      * Perform a edit on a carriage hub
      *
      */
-    public function editPost()
+    public function update()
     {
     }
 }

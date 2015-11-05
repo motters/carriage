@@ -78,7 +78,7 @@
                 "sPaginationType": "full_numbers",
                 "dom": 'T<"clear">lfrtip',
                 "tableTools": {
-                    "sSwfPath": "{{ URL::to('vendor/manchesterTemplate/js/datatables/tools/swf/copy_csv_xls_pdf.swf') }}}"
+                    "sSwfPath": "{{ URL::to('vendor/manchesterTemplate/js/datatables/tools/swf/copy_csv_xls_pdf.swf') }}"
                 }
             });
         });
