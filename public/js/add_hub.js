@@ -2,7 +2,7 @@
  * This class controls the adding / configuration of hubs
  *
  * @author Sam Mottley
- */ 
+ */
 
 var add_hub = {
 
@@ -135,11 +135,15 @@ var add_hub = {
                 ($("input[name=module_name]").val().length > 0) &&
                 ($("input[name=module_interval]").val().length > 0)
             ) {
-                // Ensure sub hub not already added
-                $("#module-val-failed").hide();
-                $("#sub-hub-modules").append( add_hub.moduleCreatePanel() );
-                add_hub.modulesAddToVar();
-                add_hub.moduleClearFields();
+                // Ensure module name  not already added
+                if (add_hub.moduleCheckNameUnique($("input[name=module_name]").val())){
+                    $("#module-val-failed").hide();
+                    $("#sub-hub-modules").append(add_hub.moduleCreatePanel());
+                    add_hub.modulesAddToVar();
+                    add_hub.moduleClearFields();
+                }else{
+                    $("#module-val-failed").show();
+                }
 
             }else{
                 $("#module-val-failed").show();
@@ -182,6 +186,17 @@ var add_hub = {
             return find.name !== name;
         });
     },
+
+    moduleCheckNameUnique: function(name){
+        var data = add_hub.modules;
+        var passed = true;
+        $.each(data, function(key, value){
+            if(name == add_hub.modules[key]["name"])
+                passed = false;
+        });
+
+        return passed;
+    }
 }
 
 $(document).ready(function () {
