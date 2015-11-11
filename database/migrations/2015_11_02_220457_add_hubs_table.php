@@ -18,7 +18,7 @@ class AddHubsTable extends Migration
             $table->integer('client_id')->references('id')->on('clients');
             $table->text('desc')->nullable();
             $table->json('module_configuration');
-            $table->string('api_key', 250);
+            $table->string('api_key', 250)->unique();
             $table->string('api_enc', 250);
             $table->string('api_user', 250);
             $table->string('api_pass', 250);

@@ -13,8 +13,9 @@ class ModulePayloadTableSeeder extends Seeder
     {
         // Emergency Contact
         DB::table('module_payload')->insert([
-            'hub_id' => '1',
+            'sub_hub_api' => '1',
             'module_id' => '1',
+            'module_type' => '1',
             'payload' => ''
         ]);
     }

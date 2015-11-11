@@ -156,19 +156,25 @@
                                         <strong>Woops!</strong> Please ensure that all the fields are fill in below and are correct!
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="carriage_name">Sub Ref Name<span class="required">*</span></label>
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="module_name">Sub Ref Name<span class="required">*</span></label>
                                         <div class="col-md-8 col-sm-8 col-xs-12">
                                             {!! Form::text('module_name', null,['required' => 'true', 'placeholder' => 'Module Reference', 'class' => 'form-control col-md-7 col-xs-12']) !!}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="carriage_name">Module<span class="required">*</span></label>
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="module id">Module ID<span class="required">*</span></label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            {!! Form::text('module_id', null,['required' => 'true', 'placeholder' => 'Module Reference', 'class' => 'form-control col-md-7 col-xs-12']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="modules">Module<span class="required">*</span></label>
                                         <div class="col-md-8 col-sm-8 col-xs-12">
                                             {!! Form::select('modules', App\Database\Settings::where('settings_type', 2)->lists('setting', 'id'), null,['required' => 'true', 'class' => 'form-control col-md-7 col-xs-12']) !!}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="client" class="control-label col-md-4 col-sm-4 col-xs-12">Sub Hub <span class="required">*</span></label>
+                                        <label for="sub_hubs" class="control-label col-md-4 col-sm-4 col-xs-12">Sub Hub <span class="required">*</span></label>
                                         <div class="col-md-8 col-sm-8 col-xs-12">
                                             {!! Form::select('sub_hubs', [''=>'Please Select'], null,['required' => 'true', 'class' => 'form-control col-md-7 col-xs-12', 'id' => 'sub_hubs']) !!}
                                         </div>

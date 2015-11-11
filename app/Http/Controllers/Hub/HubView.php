@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Hub;
 
 use Validator;
 use URL;
-
+use App\Database\Hubs as Hubs;
 
 class HubView extends \App\Http\Controllers\Controller
 {
@@ -13,9 +13,16 @@ class HubView extends \App\Http\Controllers\Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return view('app.hubs.view');
+        // Get hub config
+        $hub = Hubs::find($id);
+
+        // Init the hardware configuration services
+        $hardware = new \App\Services\HardwareConfiguration($hub->module_configuration);
+
+        // Return the view
+        return view('app.hubs.view')->withHub($hub)->withHardware($hardware);
     }
 
 }

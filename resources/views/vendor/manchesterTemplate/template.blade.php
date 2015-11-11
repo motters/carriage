@@ -144,6 +144,8 @@
         <!-- page content -->
         <div class="right_col" role="main">
 
+            @include('vendor.manchesterTemplate.partials.flash')
+
             @yield('content')
 
             @include('vendor.manchesterTemplate.partials.copyright')

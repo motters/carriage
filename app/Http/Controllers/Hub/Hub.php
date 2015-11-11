@@ -45,6 +45,21 @@ class Hub extends \App\Http\Controllers\Controller
 
 
     /**
+     * Delete a carriage hub
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $hub = Hubs::find($id);
+        if($hub->delete())
+            return Redirect::to('hubs')->withSuccess('Deleted carriage successfully from the system');
+
+        return Redirect::to('hubs')->withError('Could not delete carriage from the system, please try again');
+    }
+
+
+    /**
      * Perform a add carriage hub
      *
      * @todo VALIDATION!
@@ -100,11 +115,11 @@ class Hub extends \App\Http\Controllers\Controller
             $hub->desc = Input::get('carriage_desc');
             $hub->save();
             // Return the new ID
-            return Redirect::to('hubs/'.$id.'/edit');
+            return Redirect::to('hubs/'.$id.'/edit')->withSuccess('Updated settings successfully in the system');
         }
 
         // Return new csrf token for from
-        return Redirect::to('hubs/'.$id.'/edit');
+        return Redirect::to('hubs/'.$id.'/edit')->withError('Could not update settings, please try again');
     }
 
 
@@ -126,11 +141,11 @@ class Hub extends \App\Http\Controllers\Controller
             $hub->api_pass = Input::get('hub_api_pass');
             $hub->save();
             // Return the new ID
-            return Redirect::to('hubs/'.$id.'/edit');
+            return Redirect::to('hubs/'.$id.'/edit')->withSuccess('Updated settings successfully in the system');
         }
 
         // Return new csrf token for from
-        return Redirect::to('hubs/'.$id.'/edit');
+        return Redirect::to('hubs/'.$id.'/edit')->withError('Could not update settings, please try again');
     }
 
 

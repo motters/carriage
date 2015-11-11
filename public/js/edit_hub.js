@@ -47,7 +47,7 @@ var edit_hub = {
                     return find.setting;
             });
             moduleName = moduleName[0]['setting'];
-            $("#sub-hub-modules").append(edit_hub.moduleCreatePanel(value['name'], moduleName, value['sub_hub'], value['interval']));
+            $("#sub-hub-modules").append(edit_hub.moduleCreatePanel(value['name'], moduleName, value['sub_hub'], value['interval'],value['module_id']));
         });
 
         // Update module drop down box
@@ -173,10 +173,11 @@ var edit_hub = {
             // Validate fields (@todo improve validation later - Sam Mottley)
             if (
                 ($("input[name=module_name]").val().length > 0) &&
+                ($("input[name=module_id]").val().length > 0) &&
                 ($("input[name=module_interval]").val().length > 0)
             ) {
                 // Ensure module name  not already added
-                if (edit_hub.moduleCheckNameUnique($("input[name=module_name]").val())){
+                if (edit_hub.moduleCheckNameUnique($("input[name=module_id]").val())){
                     $("#module-val-failed").hide();
                     $("#sub-hub-modules").append(edit_hub.moduleCreatePanel());
                     edit_hub.modulesAddToVar();
@@ -195,16 +196,18 @@ var edit_hub = {
     moduleClearFields: function(){
         $("input[name=module_name]").val("");
         $("input[name=module_interval]").val("");
+        $("input[name=module_id]").val("");
     },
 
-    moduleCreatePanel: function(name, modules, subHub, interval){
+    moduleCreatePanel: function(name, modules, subHub, interval, id){
         name = name || $("input[name=module_name]").val();
         modules = modules || $("select[name=modules] option:selected").text();
         subHub = subHub || $("select[name=sub_hubs] option:selected").text();
         interval = interval || $("input[name=module_interval]").val();
+        id = id || $("input[name=module_id]").val();
 
-        return "<div class='x_panel' id='"+name+"'> <div class='x_title'><h2>Module ("+name+"...)</h2><ul class='nav navbar-right panel_toolbox' style='min-width: 25px;'><li><a class='show-content'><i class='fa fa-chevron-up'></i></a></li><li><a class='delete-sub-hub'><i class='fa fa-close'></i></a></li></ul><div class='clearfix'></div></div><div class='x_content' style='display: none;'>" +
-                "Modules: "+modules+"<br/>Sub Hubs: "+subHub+"<br/>Module Interval: "+interval+"<br/></div></div>";
+        return "<div class='x_panel' id='"+id+"'> <div class='x_title'><h2>Module ("+name+"...)</h2><ul class='nav navbar-right panel_toolbox' style='min-width: 25px;'><li><a class='show-content'><i class='fa fa-chevron-up'></i></a></li><li><a class='delete-sub-hub'><i class='fa fa-close'></i></a></li></ul><div class='clearfix'></div></div><div class='x_content' style='display: none;'>" +
+                "Module ID:"+id+"<br/>Modules: "+modules+"<br/>Sub Hubs: "+subHub+"<br/>Module Interval: "+interval+"<br/></div></div>";
     },
 
     moduleDelete: function(){
@@ -221,6 +224,7 @@ var edit_hub = {
         module["sub_hub"] = $( "select[name=sub_hubs]" ).val();
         module["module"] = $( "select[name=modules]" ).val();
         module["interval"] = $("input[name=module_interval]").val();
+        module["module_id"] = $("input[name=module_id]").val();
 
         edit_hub.modules.push(module);
     },

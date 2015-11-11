@@ -39,7 +39,32 @@
                                     <td>{{ $hub->client->client }}</td>
                                     <td><a href="{{ URL::to('hubs/'.$hub->id.'/view') }}">View</a></td>
                                     <td><a href="{{ URL::to('hubs/'.$hub->id.'/edit') }}">Edit</a></td>
-                                    <td class="last"><a href="#">Delete</a></td>
+                                    <td class="last">
+                                        <a data-toggle="modal" data-target=".delete-{{ $hub->id }}">Delete</a>
+
+
+                                        <div class="modal fade delete-{{ $hub->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+                                                    {!! Form::open(['url'=>'hubs/'.$hub->id, 'method'=>'delete']) !!}
+                                                    <div class="modal-header btn-danger">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                                                        </button>
+                                                        <h4 class="modal-title" id="myModalLabel2">Delete {{ $hub->carriage_name }}</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to delete this carriage? There's no going back!</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            {!! Form::hidden('id', $hub->id) !!}
+                                                            <button type="submit" class="btn btn-danger">DELETE FOREVER</button>
+                                                    </div>
+                                                    {!! Form::close() !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
