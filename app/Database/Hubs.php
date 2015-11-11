@@ -37,5 +37,11 @@ class Hubs extends Model{
         return $this->hasOne('App\Database\Clients', 'id', 'client_id');
     }
 
-
+    /**
+     * Get the last hub
+     */
+    public function lastest()
+    {
+        return $this->lastest()->first();
+    }
 }

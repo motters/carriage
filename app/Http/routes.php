@@ -28,7 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('hubs/add', 'Hub\Hub@add');
     Route::get('hubs/{id}/view', 'Hub\HubView@index');
     Route::post('hubs/create', 'Hub\Hub@create');
-    Route::put('hubs/{id}', 'Hub\Hub@editPost');
+    Route::put('hubs/{id}/general', 'Hub\Hub@updateGeneralSettings');
+    Route::put('hubs/{id}/api', 'Hub\Hub@updateAPISettings');
+    Route::put('hubs/{id}/hardware', 'Hub\Hub@updateHardwareSetup');
     Route::delete('hubs/{id}', 'Hub\Hub@delete');
 
 

@@ -32,12 +32,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach(App\Database\Hubs::all() as $hub)
+                            @foreach(App\Database\Hubs::with('client')->get() as $hub)
                                 <tr class="even pointer">
                                     <td>{{ $hub->id }}</td>
                                     <td>{{ $hub->carriage_name }}</td>
                                     <td>{{ $hub->client->client }}</td>
-                                    <td><a href="{{ URL::to('hubs/'.$hub->id) }}">View</a></td>
+                                    <td><a href="{{ URL::to('hubs/'.$hub->id.'/view') }}">View</a></td>
                                     <td><a href="{{ URL::to('hubs/'.$hub->id.'/edit') }}">Edit</a></td>
                                     <td class="last"><a href="#">Delete</a></td>
                                 </tr>

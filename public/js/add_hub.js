@@ -47,7 +47,7 @@ var add_hub = {
     },
 
     subHubCreatePanel: function(){
-        return "<div class='x_panel' id='"+$("input[name=sub_api_key]").val()+"'> <div class='x_title'><h2>Sub Hub ("+$("input[name=sub_name]").val()+"...)</h2><ul class='nav navbar-right panel_toolbox' style='min-width: 25px;'><li><a class='show-content'><i class='fa fa-chevron-up'></i></a></li><li><a class='delete-sub-hub'><i class='fa fa-close'></i></a></li></ul><div class='clearfix'></div></div><div class='x_content' style='display: none;'>API Key: "+$("input[name=sub_api_key]").val()+"<br/>API Enc: "+$("input[name=sub_api_enc]").val()+"<br/>API User: "+$("input[name=sub_api_pass]").val()+"<br/></div></div>";
+        return "<div class='x_panel' id='"+$("input[name=sub_api_key]").val()+"'> <div class='x_title'><h2>Sub Hub ("+$("input[name=sub_name]").val()+"...)</h2><ul class='nav navbar-right panel_toolbox' style='min-width: 25px;'><li><a class='show-content'><i class='fa fa-chevron-up'></i></a></li><li><a class='delete-sub-hub'><i class='fa fa-close'></i></a></li></ul><div class='clearfix'></div></div><div class='x_content' style='display: none;'>API Key: "+$("input[name=sub_api_key]").val()+"<br/>API Enc: "+$("input[name=sub_api_enc]").val()+"<br/>API User: "+$("input[name=sub_api_user]").val()+"<br/></div></div>";
     },
 
     subHubClearFields: function(){
@@ -103,10 +103,6 @@ var add_hub = {
         });
 
         return passed;
-    },
-
-    subHubJSON: function(){
-        // return JSON.stringify(add_hub.subHubs);
     },
 
     updateModuleDropDown: function(){
@@ -171,13 +167,13 @@ var add_hub = {
     },
 
     modulesAddToVar: function(){
-        var modules = {};
-        modules["name"] = $("input[name=module_name]").val();
-        modules["sub_hub"] = $( "select[name=sub_hubs]" ).val();
-        modules["module"] = $( "select[name=modules]" ).val();
-        modules["interval"] = $("input[name=module_interval]").val();
+        var module = {};
+        module["name"] = $("input[name=module_name]").val();
+        module["sub_hub"] = $( "select[name=sub_hubs]" ).val();
+        module["module"] = $( "select[name=modules]" ).val();
+        module["interval"] = $("input[name=module_interval]").val();
 
-        add_hub.modules.push(modules);
+        add_hub.modules.push(module);
     },
 
     modulesDeleteFromVar: function(name){
@@ -221,6 +217,7 @@ var add_hub = {
                     window.location.replace("./"+returned+"/edit");
                 }else{
                     alert( "There seems to be a technical error, please refresh your page and try again." );
+                    $("input[name=_token]").val(returned);
                 }
             }).fail(function() {
                 alert( "There seems to be a technical error, please refresh your page and try again." );
