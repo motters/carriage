@@ -13,10 +13,21 @@ class ModulePayloadTableSeeder extends Seeder
     {
         // Emergency Contact
         DB::table('module_payload')->insert([
-            'sub_hub_api' => '1',
-            'module_id' => '1',
-            'module_type' => '1',
-            'payload' => ''
+            'module_id' => '785948',
+            'module_type' => '2',
+            'payload' => '{
+              "1447283613": "24",
+              "1447283714": "22",
+              "1447283714": "22",
+              "1447283714": "22",
+              "1447283814": "23",
+              "1447283914": "24",
+              "1447284114": "23",
+              "1447284214": "28",
+              "1447284314": "24",
+              "1447284414": "23",
+              "1447284514": "22"
+            }'
         ]);
     }
 }

@@ -42,11 +42,17 @@ class HardwareConfiguration
 
     public function dataGraph($moduleId, $hubApi)
     {
-        $module = \App\Database\ModulePayload::where('module_id', $moduleId)->where('sub_hub_api', $hubApi)->first();
+        $module = \App\Database\ModulePayload::where('module_id', $moduleId)->first();
 
         if($module)
         {
-            return 'data baby';
+            switch($module->module_type)
+            {
+                case 2:
+                    $temperature = new DataPresenters\Temperature($moduleId, json_decode($module->payload));
+                    return $temperature;
+                    break;
+            }
         }
 
         return false;

@@ -30,7 +30,7 @@
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs tabs-left">
                                     @foreach($hardware->getModules($data->api_key) as $module)
-                                        <li class="@if($hardware->isFirstModule($data->api_key, $module->name)) active @endif"><a href="#{{ $module->name }}" data-toggle="tab">{{ $module->name }}</a></li>
+                                        <li class="@if($hardware->isFirstModule($data->api_key, $module->name)) active @endif"><a href="#{{ $module->module_id }}" data-toggle="tab">{{ $module->name }}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -39,9 +39,14 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     @foreach($hardware->getModules($data->api_key) as $module)
-                                        <div class="tab-pane @if($hardware->isFirstModule($data->api_key, $module->name)) active @endif" id="{{ $module->name }}">
-                                            {{ $module->name }}
-                                            {{ $hardware->dataGraph($module->module_id, $data->api_key) }}
+                                        <div class="tab-pane @if($hardware->isFirstModule($data->api_key, $module->name)) active @endif" id="{{ $module->module_id }}">
+                                            @if(!$hardware->dataGraph($module->module_id, $data->api_key))
+                                                <div class="alert alert-error alert-dismissible fade in" role="alert" style="">
+                                                    Sorry there seems to be no data for this module yet.
+                                                </div>
+                                            @else
+                                                {!! $hardware->dataGraph($module->module_id, $data->api_key)->generateGraphHTML() !!}
+                                            @endif
                                         </div>
                                     @endforeach
                                 </div>
@@ -57,30 +62,10 @@
 @stop
 
 @section('js_bottom')
-    <script>
-        //<div class="tab-pane active" id="home"><canvas id="canvas_line" height="247" width="494" style="width: 494px; height: 247px;"></canvas></div>
-        var lineChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-                {
-                    label: "My First dataset",
-                    fillColor: "rgba(38, 185, 154, 0.31)", //rgba(220,220,220,0.2)
-                    strokeColor: "rgba(38, 185, 154, 0.7)", //rgba(220,220,220,1)
-                    pointColor: "rgba(38, 185, 154, 0.7)", //rgba(220,220,220,1)
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: [31, 74, 6, 39, 20, 85, 7]
-                },
-            ]
-
-        }
-
-        $(document).ready(function () {
-            new Chart(document.getElementById("canvas_line").getContext("2d")).Line(lineChartData, {
-                responsive: true,
-                tooltipFillColor: "rgba(51, 51, 51, 0.55)"
-            });
-        });
-    </script>
+    <script type="text/javascript" src="{{ URL::to('vendor/manchesterTemplate/js/chartjs/chart.scatter.js') }}"></script>
+    @foreach($hardware->getModules($data->api_key) as $module)
+        @if($hardware->dataGraph($module->module_id, $data->api_key))
+            {!! $hardware->dataGraph($module->module_id, $data->api_key)->generateGraphScript() !!}
+        @endif
+    @endforeach
 @stop
