@@ -42,7 +42,7 @@ class HardwareConfiguration
 
     public function dataGraph($moduleId, $hubApi)
     {
-        $module = \App\Database\ModulePayload::where('module_id', $moduleId)->first();
+        $module = \App\Database\ModulePayload::where('module_connections', $moduleId)->where('sub_hub_api', $hubApi)->first();
 
         if($module)
         {

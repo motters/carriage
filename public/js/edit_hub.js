@@ -41,13 +41,21 @@ var edit_hub = {
 
         // Create module panels
         var moduleName = '';
+        var subHubName = '';
         $.each(config['modules'], function(key, value){
             moduleName = modules.filter(function (find) {
                 if(find.id == value['module'])
                     return find.setting;
             });
             moduleName = moduleName[0]['setting'];
-            $("#sub-hub-modules").append(edit_hub.moduleCreatePanel(value['name'], moduleName, value['sub_hub'], value['interval'],value['module_id']));
+
+            subHubName = config['sub_hubs'].filter(function (find) {
+                if(find.api_key == value['sub_hub'])
+                    return find.api_key;
+            });
+            subHubName = subHubName[0]['name'];
+
+            $("#sub-hub-modules").append(edit_hub.moduleCreatePanel(value['name'], moduleName, subHubName, value['interval'],value['module_connections'], value['sub_hub']));
         });
 
         // Update module drop down box
@@ -163,7 +171,7 @@ var edit_hub = {
     deleteModulesWithNoParent: function(api){
         var data = edit_hub.modules;
         edit_hub.modules = data.filter(function (find) {
-            if(find.sub_hub == api){ $("#"+find.name).remove();}
+            if(find.sub_hub == api){ $("."+find.sub_hub).remove();}
             return find.sub_hub !== api;
         });
     },
@@ -173,11 +181,11 @@ var edit_hub = {
             // Validate fields (@todo improve validation later - Sam Mottley)
             if (
                 ($("input[name=module_name]").val().length > 0) &&
-                ($("input[name=module_id]").val().length > 0) &&
+                ($("input[name=module_connections]").val().length > 0) &&
                 ($("input[name=module_interval]").val().length > 0)
             ) {
                 // Ensure module name  not already added
-                if (edit_hub.moduleCheckNameUnique($("input[name=module_id]").val())){
+                if (edit_hub.moduleCheckNameUnique($("select[name=sub_hubs]").val()+$("input[name=module_connections]").val())){
                     $("#module-val-failed").hide();
                     $("#sub-hub-modules").append(edit_hub.moduleCreatePanel());
                     edit_hub.modulesAddToVar();
@@ -196,18 +204,21 @@ var edit_hub = {
     moduleClearFields: function(){
         $("input[name=module_name]").val("");
         $("input[name=module_interval]").val("");
-        $("input[name=module_id]").val("");
+        $("input[name=module_connections]").val("");
     },
 
-    moduleCreatePanel: function(name, modules, subHub, interval, id){
+    moduleCreatePanel: function(name, modules, subHub, interval, connect, subhubapi){
+        subhubapi = subhubapi ||$("select[name=sub_hubs] option:selected").val();
+        var id = subhubapi+connect || $("select[name=sub_hubs] option:selected").val()+$("input[name=module_connections]").val()
+
         name = name || $("input[name=module_name]").val();
         modules = modules || $("select[name=modules] option:selected").text();
         subHub = subHub || $("select[name=sub_hubs] option:selected").text();
         interval = interval || $("input[name=module_interval]").val();
-        id = id || $("input[name=module_id]").val();
+        connect = connect || $("input[name=module_connections]").val();
 
-        return "<div class='x_panel' id='"+id+"'> <div class='x_title'><h2>Module ("+name+"...)</h2><ul class='nav navbar-right panel_toolbox' style='min-width: 25px;'><li><a class='show-content'><i class='fa fa-chevron-up'></i></a></li><li><a class='delete-sub-hub'><i class='fa fa-close'></i></a></li></ul><div class='clearfix'></div></div><div class='x_content' style='display: none;'>" +
-                "Module ID:"+id+"<br/>Modules: "+modules+"<br/>Sub Hubs: "+subHub+"<br/>Module Interval: "+interval+"<br/></div></div>";
+        return "<div class='x_panel "+subhubapi+"' id='"+id+"'> <div class='x_title'><h2>Module ("+name+"...)</h2><ul class='nav navbar-right panel_toolbox' style='min-width: 25px;'><li><a class='show-content'><i class='fa fa-chevron-up'></i></a></li><li><a class='delete-sub-hub'><i class='fa fa-close'></i></a></li></ul><div class='clearfix'></div></div><div class='x_content' style='display: none;'>" +
+                "Module Connections:"+connect+"<br/>Modules: "+modules+"<br/>Sub Hubs: "+subHub+"<br/>Module Interval: "+interval+"<br/></div></div>";
     },
 
     moduleDelete: function(){
@@ -224,7 +235,7 @@ var edit_hub = {
         module["sub_hub"] = $( "select[name=sub_hubs]" ).val();
         module["module"] = $( "select[name=modules]" ).val();
         module["interval"] = $("input[name=module_interval]").val();
-        module["module_id"] = $("input[name=module_id]").val();
+        module["module_connections"] = $("input[name=module_connections]").val();
 
         edit_hub.modules.push(module);
     },
@@ -240,7 +251,7 @@ var edit_hub = {
         var data = edit_hub.modules;
         var passed = true;
         $.each(data, function(key, value){
-            if(name == edit_hub.modules[key]["name"])
+            if(name == edit_hub.modules[key]["sub_hub"]+edit_hub.modules[key]["module_connections"])
                 passed = false;
         });
 

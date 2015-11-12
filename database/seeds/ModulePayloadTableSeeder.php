@@ -13,7 +13,8 @@ class ModulePayloadTableSeeder extends Seeder
     {
         // Emergency Contact
         DB::table('module_payload')->insert([
-            'module_id' => '785948',
+            'module_connections' => 'SHA-A3',
+            'sub_hub_api' => 'okpo',
             'module_type' => '2',
             'payload' => '{
               "1447283613": "24",

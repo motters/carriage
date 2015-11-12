@@ -162,12 +162,6 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="module id">Module ID<span class="required">*</span></label>
-                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                            {!! Form::text('module_id', null,['required' => 'true', 'placeholder' => 'Module Reference', 'class' => 'form-control col-md-7 col-xs-12']) !!}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="modules">Module<span class="required">*</span></label>
                                         <div class="col-md-8 col-sm-8 col-xs-12">
                                             {!! Form::select('modules', App\Database\Settings::where('settings_type', 2)->lists('setting', 'id'), null,['required' => 'true', 'class' => 'form-control col-md-7 col-xs-12']) !!}
@@ -177,6 +171,12 @@
                                         <label for="sub_hubs" class="control-label col-md-4 col-sm-4 col-xs-12">Sub Hub <span class="required">*</span></label>
                                         <div class="col-md-8 col-sm-8 col-xs-12">
                                             {!! Form::select('sub_hubs', [''=>'Please Select'], null,['required' => 'true', 'class' => 'form-control col-md-7 col-xs-12', 'id' => 'sub_hubs']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="module_connections">Module Connections<span class="required">*</span></label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            {!! Form::text('module_connections', null,['required' => 'true', 'placeholder' => 'Module connections (see examples)', 'class' => 'form-control col-md-7 col-xs-12']) !!}
                                         </div>
                                     </div>
                                     <div class="form-group">

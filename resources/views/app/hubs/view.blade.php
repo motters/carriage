@@ -30,7 +30,7 @@
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs tabs-left">
                                     @foreach($hardware->getModules($data->api_key) as $module)
-                                        <li class="@if($hardware->isFirstModule($data->api_key, $module->name)) active @endif"><a href="#{{ $module->module_id }}" data-toggle="tab">{{ $module->name }}</a></li>
+                                        <li class="@if($hardware->isFirstModule($data->api_key, $module->name)) active @endif"><a href="#{{ $module->sub_hub.$module->module_connections }}" data-toggle="tab">{{ $module->name }}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -39,8 +39,8 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     @foreach($hardware->getModules($data->api_key) as $module)
-                                        <div class="tab-pane @if($hardware->isFirstModule($data->api_key, $module->name)) active @endif" id="{{ $module->module_id }}">
-                                            @if($container = $hardware->dataGraph($module->module_id, $data->api_key))
+                                        <div class="tab-pane @if($hardware->isFirstModule($data->api_key, $module->name)) active @endif" id="{{ $module->sub_hub.$module->module_connections }}">
+                                            @if($container = $hardware->dataGraph($module->module_connections, $data->api_key))
                                                 @include('presenters.'.$container->getModule().'.panel', $container->getModuleArray())
                                             @else
                                                 <div class="alert alert-error alert-dismissible fade in" role="alert" style="">
@@ -64,7 +64,7 @@
 @section('js_bottom')
     <script type="text/javascript" src="{{ URL::to('vendor/manchesterTemplate/js/chartjs/chart.scatter.js') }}"></script>
     @foreach($hardware->getModules($data->api_key) as $module)
-        @if($graph = $hardware->dataGraph($module->module_id, $data->api_key))
+        @if($graph = $hardware->dataGraph($module->module_connections, $data->api_key))
             @include('presenters.'.$graph->getModule().'.panel_js', $graph->getModuleArray())
         @endif
     @endforeach
