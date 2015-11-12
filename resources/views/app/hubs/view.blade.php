@@ -40,12 +40,12 @@
                                 <div class="tab-content">
                                     @foreach($hardware->getModules($data->api_key) as $module)
                                         <div class="tab-pane @if($hardware->isFirstModule($data->api_key, $module->name)) active @endif" id="{{ $module->module_id }}">
-                                            @if(!$hardware->dataGraph($module->module_id, $data->api_key))
+                                            @if($container = $hardware->dataGraph($module->module_id, $data->api_key))
+                                                @include('presenters.'.$container->getModule().'.panel', $container->getModuleArray())
+                                            @else
                                                 <div class="alert alert-error alert-dismissible fade in" role="alert" style="">
                                                     Sorry there seems to be no data for this module yet.
                                                 </div>
-                                            @else
-                                                {!! $hardware->dataGraph($module->module_id, $data->api_key)->generateGraphHTML() !!}
                                             @endif
                                         </div>
                                     @endforeach
@@ -64,8 +64,8 @@
 @section('js_bottom')
     <script type="text/javascript" src="{{ URL::to('vendor/manchesterTemplate/js/chartjs/chart.scatter.js') }}"></script>
     @foreach($hardware->getModules($data->api_key) as $module)
-        @if($hardware->dataGraph($module->module_id, $data->api_key))
-            {!! $hardware->dataGraph($module->module_id, $data->api_key)->generateGraphScript() !!}
+        @if($graph = $hardware->dataGraph($module->module_id, $data->api_key))
+            @include('presenters.'.$graph->getModule().'.panel_js', $graph->getModuleArray())
         @endif
     @endforeach
 @stop

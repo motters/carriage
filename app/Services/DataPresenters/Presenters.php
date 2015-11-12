@@ -4,8 +4,12 @@
 interface Presenters
 {
 
-    public function generateGraphHTML();
+    public function getModule();
 
-    public function generateGraphScript();
+    public function getModuleArray();
+
+    public function getModuleId();
+
+    public function getModuleData();
 
 }
