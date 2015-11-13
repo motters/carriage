@@ -51,3 +51,15 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
+/**
+ * API routes
+ *
+ * @protected via api login
+ */
+Route::group(['prefix' => 'api/v1', 'middleware' => 'microAPIAuth'], function () {
+
+    Route::get('config/{api}', 'Api\Config@show');
+
+    Route::put('data/{api}', 'Api\Data@post');
+});
+
