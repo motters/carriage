@@ -243,7 +243,7 @@ var edit_hub = {
     modulesDeleteFromVar: function(name){
         var data = edit_hub.modules;
         edit_hub.modules = data.filter(function (find) {
-            return find.name !== name;
+            return find.sub_hub+find.module_connections !== name;
         });
     },
 
