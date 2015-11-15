@@ -16,7 +16,7 @@ class Config extends \App\Http\Controllers\Controller
     public function show($api)
     {
 
-        return 1;
+        return response()->json(['name' => 'Abigail', 'state' => 'CA']);;
     }
 
 }
