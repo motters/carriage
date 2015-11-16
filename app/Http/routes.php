@@ -50,7 +50,25 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+Route::get('test', function(){
+    // Grade data
+    $hub = json_decode(App\Database\Hubs::where('api_key', '8zA4N3vDrhgEFQugX4ThtO1Ch')->first());
 
+    // reduce data
+    $data = json_decode($hub->module_configuration);
+
+    foreach($data->sub_hubs as $no => $values){
+        $temp = $data->sub_hubs;
+        unset($temp[$no]->name);
+    }
+    foreach($data->modules as $no => $values){
+        $temp = $data->modules;
+        unset($temp[$no]->name);
+    }
+
+
+    dd($data);
+});
 
 /**
  * API routes
