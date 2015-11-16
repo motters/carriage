@@ -58,15 +58,17 @@ Route::get('test', function(){
     $data = json_decode($hub->module_configuration);
 
     foreach($data->sub_hubs as $no => $values){
-        $temp = $data->sub_hubs;
-        unset($temp[$no]->name);
+        unset($values->name);
+        foreach($data->modules as $mno => $mvalues){
+            unset($mvalues->name);
+            if($mvalues->sub_hub == $values->api_key){
+                unset($mvalues->sub_hub);
+                $data->sub_hubs[$no]->modules[] = $mvalues;
+            }
+        }
     }
-    foreach($data->modules as $no => $values){
-        $temp = $data->modules;
-        unset($temp[$no]->name);
-    }
-
-
+    unset($data->modules);
+    $data = $data->sub_hubs;
     dd($data);
 });
 

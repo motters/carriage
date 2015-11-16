@@ -18,18 +18,21 @@ class Config extends \App\Http\Controllers\Controller
         // Grade data
         $hub = json_decode(Hubs::where('api_key', $api)->first());
 
-        // Reduce data
+        // Decode serial data
         $data = json_decode($hub->module_configuration);
 
-       foreach($data->sub_hubs as $no => $values){
-            $temp = $data->sub_hubs;
-            unset($temp[$no]->name);
+        // Reduce data
+        foreach($data->sub_hubs as $no => $values){
+            unset($values->name);
+            foreach($data->modules as $mno => $mvalues){
+                unset($mvalues->name);
+                if($mvalues->sub_hub == $values->api_key){
+                    unset($mvalues->sub_hub);
+                    $data->sub_hubs[$no]->modules[] = $mvalues;
+                }
+            }
         }
-        foreach($data->modules as $no => $values){
-            $temp = $data->modules;
-            unset($temp[$no]->name);
-        }
-
+        unset($data->modules);
 
         // Dirty but effective way of removing laravel headers
         echo json_encode($data);
