@@ -59,11 +59,13 @@ Route::get('test', function(){
 
     foreach($data->sub_hubs as $no => $values){
         unset($values->name);
+        $data->sub_hubs[$values->api_key] = $values;
+        unset($data->sub_hubs[$no]);
         foreach($data->modules as $mno => $mvalues){
             unset($mvalues->name);
             if($mvalues->sub_hub == $values->api_key){
                 unset($mvalues->sub_hub);
-                $data->sub_hubs[$no]->modules[] = $mvalues;
+                $data->sub_hubs[$values->api_key]->modules[] = $mvalues;
             }
         }
     }
