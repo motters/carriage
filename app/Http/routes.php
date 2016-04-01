@@ -84,6 +84,6 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'microAPIAuth'], function ()
 
     Route::get('config/{api}', 'Api\Config@show');
 
-    Route::put('upload/{api}', 'Api\Data@upload');
+    Route::post('upload/{api}', 'Api\Upload@upload');
 });
 

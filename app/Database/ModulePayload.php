@@ -26,7 +26,7 @@ class ModulePayload extends Model{
      *
      * @var array
      */
-    protected $touches = ['Hubs'];
+    //protected $touches = ['Hubs'];
 
     /**
      * Get the hub's record associated with the current payload.
