@@ -74,6 +74,7 @@ Route::get('test', function(){
     dd($data);
 });
 
+
 /**
  * API routes
  *
@@ -83,6 +84,6 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'microAPIAuth'], function ()
 
     Route::get('config/{api}', 'Api\Config@show');
 
-    Route::put('data/{api}', 'Api\Data@post');
+    Route::put('upload/{api}', 'Api\Data@upload');
 });
 

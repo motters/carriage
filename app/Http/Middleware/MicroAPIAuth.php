@@ -20,11 +20,17 @@ class MicroAPIAuth
      */
     public function handle($request, Closure $next)
     {
+        \Log::info('Connection made');
         // Get the username,  password and api key
         $username = $request->headers->get('username');
         $password_in = $request->headers->get('password');
         $api = $request->headers->get('api');
         $key = $request->headers->get('enc');
+
+        \Log::info('API:'.$api);
+        \Log::info('password:'.$password_in);
+        \Log::info('username:'.$username);
+        \Log::info('key:'.$key);
 
         // Check not empty headers
         if(!$username or !$password_in or !$api or !$key)
