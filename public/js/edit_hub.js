@@ -181,13 +181,11 @@ var edit_hub = {
     addModule: function(){
         $( "#add-module" ).click(function() {
             // Validate fields (@todo improve validation later - Sam Mottley)
-            console.log(1);
             if (
                 ($("input[name=module_name]").val().length > 0) &&
                 ($("input[name=module_connections]").val().length > 0) &&
                 ($("input[name=module_interval]").val().length > 0)
             ) {
-                console.log(2);
                 // Ensure module name  not already added
                 if (edit_hub.moduleCheckNameUnique($("select[name=sub_hubs]").val()+$("input[name=module_connections]").val())){
                     $("#module-val-failed").hide();
@@ -202,7 +200,6 @@ var edit_hub = {
                 $("#module-val-failed").show();
             }
         });
-        console.log(3);
         edit_hub.moduleDelete();
     },
 
@@ -244,12 +241,9 @@ var edit_hub = {
 
         if(edit_hub.modules){
             edit_hub.modules.push(module);
-            console.log(edit_hub.modules);
         }else{
             edit_hub.modules = new Array();
-            edit_hub.modules[0] = module;
-            console.log(edit_hub.modules);
-            console.log(module);
+            edit_hub.modules[0] = module;;
         }
 
     },
