@@ -38,11 +38,13 @@ class Upload extends \App\Http\Controllers\Controller
             $moduleSeperate = explode('!', $modules);
 
             // Check there is previous data
-            $records = ModulePayload::where('sub_hub_api', $sub_api)->where('module_connections', $moduleSeperate[0])->where('module_type', $moduleSeperate[1])->first();
+            $records = false;
+            if($sub_api and array_key_exists(0, $moduleSeperate) and array_key_exists(1, $moduleSeperate))
+                $records = ModulePayload::where('sub_hub_api', $sub_api)->where('module_connections', $moduleSeperate[0])->where('module_type', $moduleSeperate[1])->first();
 
             if($records){
                 // Format the data
-                $DBData = $formatter->format($moduleSeperate[1], $moduleSeperate[2], $records->payload);
+                $DBData = $formatter->format($moduleSeperate[1],  substr($moduleSeperate[2], 1), $records->payload);
 
                 // Update an existing record
                 $records->sub_hub_api = $sub_api;
@@ -52,7 +54,7 @@ class Upload extends \App\Http\Controllers\Controller
                 $records->save();
             }else{
                 // Format the data
-                $DBData = $formatter->format($moduleSeperate[1], $moduleSeperate[2]);
+                $DBData = $formatter->format($moduleSeperate[1], substr($moduleSeperate[2], 1));
 
                 // Create a new record
                 $module_new = new ModulePayload;
