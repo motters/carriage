@@ -59,9 +59,7 @@
                 <div class="clearfix"></div>
                 <div class="separator">
 
-                    <p class="change_link">New to site?
-                        <a href="#toregister" class="to_register"> Create Account </a>
-                    </p>
+                    <p class="change_link">Speak to you manger to gain access to the system.</p>
                     <div class="clearfix"></div>
                     <br />
                     <div>

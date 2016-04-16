@@ -35,7 +35,6 @@
       * Side Bar Links
       */
      'side_links' => [
-         ['url'=>'dashboard', 'name'=>'Dashboard', 'icon' => 'fa-home'],
          [
              'name'=>'Hubs',
              'icon' => 'fa-train',
@@ -52,6 +51,5 @@
                  'Add New User' => ['name'=>'Add New User', 'url'=>'users/add']
              ],
          ],
-         ['name'=>'Settings',  'icon' => 'fa-cog', 'url'=>'settings'],
      ]
  );

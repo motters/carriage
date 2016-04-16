@@ -1,7 +1,7 @@
 <?php namespace App\Services\DataPresenters;
 
 
-class Temperature extends Presenter implements Presenters
+class AirFlow extends Presenter implements Presenters
 {
 
     public function __construct($moduleId, $data)
@@ -13,7 +13,7 @@ class Temperature extends Presenter implements Presenters
 
     public function getModule()
     {
-        return 'temperature';
+        return 'airflow';
     }
 
 
@@ -34,22 +34,12 @@ class Temperature extends Presenter implements Presenters
         // Graph one
         $g1=[];
         foreach($this->data as $no => $data){
-            if($data->temp != "NAN")
-                $g1[] = ['x'=>'new Date(\''.date('Y-m-d\TH:i:s',$no).'\')', 'y'=>(int)$data->temp];
+            $g1[] = ['x'=>'new Date(\''.date('Y-m-d\TH:i:s',$no).'\')', 'y'=>(int)$data->flow];
         }
         $graph1 = str_replace(['"new', ')"'],['new', ')'],json_encode($g1,JSON_UNESCAPED_SLASHES));
 
-        // Graph two
-        $g2=[];
-        foreach($this->data as $no => $data){
-            if($data->temp != "NAN")
-                $g2[] = ['x'=>'new Date(\''.date('Y-m-d\TH:i:s',$no).'\')', 'y'=>(int)$data->humid];
-        }
-        $graph2 = str_replace(['"new', ')"'],['new', ')'],json_encode($g2,JSON_UNESCAPED_SLASHES));
-
         // Combine Data
         $graphs[1] = $graph1;
-        $graphs[2] = $graph2;
 
         return $graphs;
 

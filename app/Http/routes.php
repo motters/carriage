@@ -4,7 +4,7 @@
  * Authentication
  */
 Route::get('/', function(){
-    return redirect('dashboard');
+    return redirect('hubs');
 });
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

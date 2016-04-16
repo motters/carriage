@@ -39,9 +39,9 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     @foreach($hardware->getModules($data->api_key) as $module)
-                                        <div class="tab-pane @if($hardware->isFirstModule($data->api_key, $module->name)) active @endif" id="{{ $module->sub_hub.$module->module_connections }}">
+                                        <div class="tab-pane @if($hardware->isFirstModule($data->api_key, $module->name))  @endif active" id="{{ $module->sub_hub.$module->module_connections }}">
                                             @if($container = $hardware->dataGraph($module->module_connections, $data->api_key))
-                                                @include('presenters.'.$container->getModule().'.panel', $container->getModuleArray())
+                                                @include('presenters.'.$container->getModule().'.panel', $container->getModuleArray() + ['api'=>$data->api_key])
                                             @else
                                                 <div class="alert alert-error alert-dismissible fade in" role="alert" style="">
                                                     Sorry there seems to be no data for this module yet.
@@ -65,7 +65,7 @@
     <script type="text/javascript" src="{{ URL::to('vendor/manchesterTemplate/js/chartjs/chart.scatter.js') }}"></script>
     @foreach($hardware->getModules($data->api_key) as $module)
         @if($graph = $hardware->dataGraph($module->module_connections, $data->api_key))
-            @include('presenters.'.$graph->getModule().'.panel_js', $graph->getModuleArray())
+            @include('presenters.'.$graph->getModule().'.panel_js', $graph->getModuleArray() + ['api'=>$data->api_key])
         @endif
     @endforeach
 @stop

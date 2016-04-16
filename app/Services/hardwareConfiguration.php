@@ -52,6 +52,18 @@ class HardwareConfiguration
                     $temperature = new DataPresenters\Temperature($moduleId, json_decode($module->payload));
                     return $temperature;
                     break;
+                case 3:
+                    $vibration = new DataPresenters\Vibration($moduleId, json_decode($module->payload));
+                    return $vibration;
+                    break;
+                case 4:
+                    $airflow = new DataPresenters\AirFlow($moduleId, json_decode($module->payload));
+                    return $airflow;
+                    break;
+                case 5:
+                    $gps = new DataPresenters\GPS($moduleId, json_decode($module->payload));
+                    return $gps;
+                    break;
             }
         }
 

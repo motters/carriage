@@ -22,7 +22,7 @@ class Upload extends \App\Http\Controllers\Controller
         // Sort data
         $data = \Input::get('data');
         $data = explode('}', $data);
-
+        \Log::info($data);
         // Init uC formatter class
         $formatter = new \App\Services\DataFormatter();
 
@@ -34,13 +34,30 @@ class Upload extends \App\Http\Controllers\Controller
                 continue;
             }
 
-            // Separate the connection id with data
-            $moduleSeperate = explode('!', $modules);
+            // Check info block
+           // if($no == 1) {
+            $moduleSeperate = explode('!', $modules); // Separate the connection id with data
 
             // Check there is previous data
             $records = false;
-            if($sub_api and array_key_exists(0, $moduleSeperate) and array_key_exists(1, $moduleSeperate))
+            if ($sub_api and array_key_exists(0, $moduleSeperate) and array_key_exists(1, $moduleSeperate))
                 $records = ModulePayload::where('sub_hub_api', $sub_api)->where('module_connections', $moduleSeperate[0])->where('module_type', $moduleSeperate[1])->first();
+
+            // Perform some rough validation
+            $validate = ['module_connection' => $moduleSeperate[0], 'module_type' => $moduleSeperate[1], 'sub_api' => $sub_api, 'data' => $moduleSeperate[2]];
+            $validator = \Validator::make($validate, [
+                'module_connection' => 'required',
+                'module_type' => 'required|between:1,4',
+                'sub_api' => 'required',
+                'data' => 'required',
+            ]);
+
+            // Validation fails return 400 (error)
+            if ($validator->fails()) {
+                echo 200;
+                exit(0);
+            }
+//            /}
 
             if($records){
                 // Format the data
