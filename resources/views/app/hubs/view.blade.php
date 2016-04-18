@@ -63,7 +63,7 @@
 
 @section('js_bottom')
     <script type="text/javascript" src="{{ URL::to('vendor/manchesterTemplate/js/chartjs/chart.scatter.js') }}"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript" src="{{ URL::to('js/vendor/highcharts.js') }}"></script>
     @foreach($hardware->getModules($data->api_key) as $module)
         @if($graph = $hardware->dataGraph($module->module_connections, $data->api_key))
             @include('presenters.'.$graph->getModule().'.panel_js', $graph->getModuleArray() + ['api'=>$data->api_key])
