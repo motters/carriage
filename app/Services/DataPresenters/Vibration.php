@@ -49,7 +49,7 @@ class Vibration extends Presenter implements Presenters
 
         $g3=[];
         foreach($this->data as $no => $data){
-            $g3[] = [(int) ($no."000"), (int) str_replace('-','',$data->z/16384)*1000];
+            $g3[] = [(int) ($no."000"), (int) str_replace('-','',$data->z/1638)];
         }
         $graph3 = str_replace(['"new', ')"'],['new', ')'],json_encode($g3,JSON_UNESCAPED_SLASHES));
 

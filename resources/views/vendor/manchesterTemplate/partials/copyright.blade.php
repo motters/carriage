@@ -1,7 +1,7 @@
 <!-- footer content -->
 <footer>
     <div>
-        <p class="pull-right">Electronics Section. |<span class="lead"> <img src="{{ URL::to('vendor/manchesterTemplate/images/manchester/copyright.png') }}"/> Chemistry, University of Manchester</span></p>
+        <p class="pull-right">Statistic for the smart. |<span class="lead"> Carriage Hubs</span></p>
     </div>
     <div class="clearfix"></div>
 </footer>

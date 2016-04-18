@@ -43,13 +43,13 @@
                  'Add New Hubs' => ['name'=>'Add New Hub', 'url'=>'hubs/add']
              ],
          ],
-        [
+        /*[
              'name'=>'Users',
              'icon' => 'fa-user',
              'child' => [
                  'List Users' => ['name'=>'List Users', 'url'=>'users'],
                  'Add New User' => ['name'=>'Add New User', 'url'=>'users/add']
              ],
-         ],
+         ],*/
      ]
  );

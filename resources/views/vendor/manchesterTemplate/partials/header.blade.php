@@ -7,7 +7,7 @@
 
     @yield('meta')
 
-    <title>{{ $title or trans('template::template.control_panel') }}</title>
+    <title>{{ $title or 'Carriage Hubs' }}</title>
 
 
     @yield('css_top')

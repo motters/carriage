@@ -34,7 +34,10 @@ class AirFlow extends Presenter implements Presenters
         // Graph one
         $g1=[];
         foreach($this->data as $no => $data){
-            $g1[] = [(int) ($no."000"), (int)$data->flow];
+            if($data->flow > 1000){
+                $g1[] = [(int) ($no."000"), (int)($data->flow-1400)];
+            }
+
         }
         $graph1 = str_replace(['"new', ')"'],['new', ')'],json_encode($g1,JSON_UNESCAPED_SLASHES));
 
