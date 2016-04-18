@@ -41,14 +41,14 @@ class DataFormatter
      * @param $previousData Previous data in the DB to merged with new data
      * @return string
      */
-    public function temperature($data, $previousData)
+    public function temperature($data, $previousData = false)
     {
         // Example data 1460769030@21.00:28.00
         $readings = [];
-        $time_data = explode('@', $data);
-        if($time_data[1] and $time_data[0] > 1459989919){
+        $time_data = explode('@', $data); //1460987091
+        if(array_key_exists(0, $time_data) and array_key_exists(1, $time_data) and $time_data[0] > 1459989919 and $time_data[0] < time()){
             $readArray = explode(':', $time_data[1]);
-            if($readArray[0] < 100 and $readArray[1] < 200){
+            if(array_key_exists(0, $readArray) and array_key_exists(1, $readArray) and $readArray[0] < 100 and $readArray[1] < 200){
                 $read['temp'] = $readArray[0];
                 $read['humid'] = $readArray[1];
                 $readings[$time_data[0]] = $read;
@@ -75,15 +75,16 @@ class DataFormatter
      * @param $previousData Previous data in the DB to merged with new data
      * @return string
      */
-    public function airFlow($data, $previousData)
+    public function airFlow($data, $previousData = false)
     {
         // Example data 1460769030@2785
         $readings = [];
+        $read = [];
         $time_data = explode('@', $data);
-        if($time_data[1] and $time_data[0] > 1459989919){
+        if(array_key_exists(0, $time_data) and array_key_exists(1, $time_data) and $time_data[0] > 1459989919 and $time_data[0] < time()){
             $read['flow'] = $time_data[1];
+            $readings[$time_data[0]] = $read;
         }
-
 
         // Merge previous data if there is any
         if($previousData){
@@ -104,21 +105,21 @@ class DataFormatter
      * @param $previousData Previous data in the DB to merged with new data
      * @return string
      */
-    public function vibration($data, $previousData)
+    public function vibration($data, $previousData = false)
     {
         // Example data 1460769030@-4316:-2676:15908
         $readings = [];
+        $read = [];
         $time_data = explode('@', $data);
-        if($time_data[1] and $time_data[0] > 1459989919){
+        if(array_key_exists(0, $time_data) and array_key_exists(1, $time_data) and $time_data[0] > 1459989919 and $time_data[0] < time()){
             $readArray = explode(':', $time_data[1]);
-            if($readArray[0] < 100 and $readArray[1] < 200){
+            if(array_key_exists(0, $readArray) and array_key_exists(1, $readArray) and array_key_exists(2, $readArray)){
                 $read['x'] = $readArray[0];
                 $read['y'] = $readArray[1];
-                $read['z'] = $readArray[1];
+                $read['z'] = $readArray[2];
                 $readings[$time_data[0]] = $read;
             }
         }
-
 
         // Merge previous data if there is any
         if($previousData){
@@ -139,14 +140,14 @@ class DataFormatter
      * @param $previousData Previous data in the DB to merged with new data
      * @return string
      */
-    public function gps($data, $previousData)
+    public function gps($data, $previousData = false)
     {
         // Example data 1460769030@3:52.265458:2.165898
         $readings = [];
         $time_data = explode('@', $data);
-        if($time_data[1] and $time_data[0] > 1459989919){
+        if(array_key_exists(0, $time_data) and array_key_exists(1, $time_data) and $time_data[1] and $time_data[0] > 1459989919 and $time_data[0] < time()){
             $readArray = explode(':', $time_data[1]);
-            if($readArray[0] < 100 and $readArray[1] < 200){
+            if(array_key_exists(0, $readArray) and array_key_exists(1, $readArray) and array_key_exists(2, $readArray) and $readArray[0] < 100 and $readArray[1] < 200){
                 $read['lat'] = $readArray[1];
                 $read['lng'] = $readArray[2];
                 $group['address'] = $read;

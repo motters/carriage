@@ -32,21 +32,24 @@ class Vibration extends Presenter implements Presenters
     public function getModuleData()
     {
         // Graph one
-        $g1=[];
+        $g1=[]; // [Date.UTC(2013,5,2),0.7695]
+        $i=0;
         foreach($this->data as $no => $data){
-            $g1[] = ['x'=>'new Date(\''.date('Y-m-d\TH:i:s',$no).'\')', 'y'=>str_replace('-','',$data->x)];
+            if($i==0){ $firstTime = (int) ($no."000"); $i=1; }
+            $lastTime = (int) ($no."000");
+            $g1[] = [(int) ($no."000"), (int) (str_replace('-','',$data->x))];
         }
         $graph1 = str_replace(['"new', ')"'],['new', ')'],json_encode($g1,JSON_UNESCAPED_SLASHES));
 
         $g2=[];
         foreach($this->data as $no => $data){
-            $g2[] = ['x'=>'new Date(\''.date('Y-m-d\TH:i:s',$no).'\')', 'y'=>str_replace('-','',$data->y)];
+            $g2[] = [(int) ($no."000"), (int) str_replace('-','',$data->y)];
         }
         $graph2 = str_replace(['"new', ')"'],['new', ')'],json_encode($g2,JSON_UNESCAPED_SLASHES));
 
         $g3=[];
         foreach($this->data as $no => $data){
-            $g3[] = ['x'=>'new Date(\''.date('Y-m-d\TH:i:s',$no).'\')', 'y'=>str_replace('-','',$data->z)];
+            $g3[] = [(int) ($no."000"), (int) str_replace('-','',$data->z/16384)*1000];
         }
         $graph3 = str_replace(['"new', ')"'],['new', ')'],json_encode($g3,JSON_UNESCAPED_SLASHES));
 
@@ -54,6 +57,8 @@ class Vibration extends Presenter implements Presenters
         $graphs[1] = $graph1;
         $graphs[2] = $graph2;
         $graphs[3] = $graph3;
+        $graphs['first'] = $firstTime;
+        $graphs['last'] = $lastTime;
 
         return $graphs;
 

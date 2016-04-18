@@ -1,57 +1,100 @@
 <script>
     $(document).ready(function () {
-        var graph1 = [{
-            label: "temperature",
-            fillColor: "rgba(38, 185, 154, 0.31)", //rgba(220,220,220,0.2)
-            strokeColor: "rgba(38, 185, 154, 0.7)", //rgba(220,220,220,1)
-            pointColor: "rgba(38, 185, 154, 0.7)", //rgba(220,220,220,1)
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: {!! $data[1] !!}
-        }];
 
-        new Chart(document.getElementById("a{{ $moduleId }}").getContext("2d")).Scatter(graph1, {
-            responsive: true,
-            showScale: true,
-            scaleBeginAtZero: true,
-            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-
-            bezierCurve: true,
-            showTooltips: true,
-            scaleShowHorizontalLines: true,
-            scaleShowLabels: true,
-            scaleType: "date",
-            scaleLabel: "<%=value%> C"
+        $('#a-{{ $moduleId }}').highcharts({
+            title: {
+                text: 'Temperature Readings',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'Temperature and Humidity Module',
+                x: -20
+            },
+            yAxis: {
+                title: {
+                    text: 'Temperature'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    month: '%e. %b',
+                    year: '%b'
+                },
+                title: {
+                    text: 'Date'
+                }
+            },
+            tooltip: {
+                valueSuffix: 'G'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Temperature (C)',
+                data: {!! $data[1] !!}
+            }]
         });
 
 
 
-
-
-
-        var graph2 = [{
-            label: "temperature",
-            fillColor: "rgba(38, 185, 154, 0.31)", //rgba(220,220,220,0.2)
-            strokeColor: "rgba(38, 185, 154, 0.7)", //rgba(220,220,220,1)
-            pointColor: "rgba(38, 185, 154, 0.7)", //rgba(220,220,220,1)
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: {!! $data[2] !!}
-            }];
-
-        var graphint = new Chart($("#b{{ $moduleId }}").get(0).getContext("2d")).Scatter(graph2, {
-            responsive: true,
-            showScale: true,
-            scaleBeginAtZero: true,
-            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-            bezierCurve: true,
-            showTooltips: true,
-            scaleShowHorizontalLines: true,
-            scaleShowLabels: true,
-            scaleType: "date",
-            scaleLabel: "<%=value%>"
+        $('#b-{{ $moduleId }}').highcharts({
+            title: {
+                text: 'Humidity Readings',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'Temperature and Humidity Module',
+                x: -20
+            },
+            credits: {
+                enabled: false
+            },
+            yAxis: {
+                title: {
+                    text: 'Humidity'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    month: '%e. %b',
+                    year: '%b'
+                },
+                title: {
+                    text: 'Date'
+                }
+            },
+            tooltip: {
+                valueSuffix: 'G'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'Humidity',
+                data: {!! $data[2] !!}
+            }]
         });
 
         $('#humidity').removeClass('active');

@@ -43,7 +43,7 @@ class Config extends \App\Http\Controllers\Controller
                             unset($data->sub_hubs[$i]->modules[$ii]->name);
                         }
                     }
-                    $ii = 1;
+                    //$ii = 1;
                 }
                 $data->sub_hubs[$i]->modules = array_values($data->sub_hubs[$i]->modules);
             }
@@ -51,6 +51,7 @@ class Config extends \App\Http\Controllers\Controller
             $modules = array_merge($data->sub_hubs, $modules);
         }
         unset($data->modules);
+
         // Dirty but effective way of removing laravel headers and minimising json string length for uC
         echo str_replace(['api_key', 'api_pass', 'modules', 'module_connections', 'interval', 'module'], ['s', 'p', 'm', 'mc', 'in', 't'], json_encode($modules));
         exit(0);

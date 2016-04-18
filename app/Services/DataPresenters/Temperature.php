@@ -35,7 +35,7 @@ class Temperature extends Presenter implements Presenters
         $g1=[];
         foreach($this->data as $no => $data){
             if($data->temp != "NAN")
-                $g1[] = ['x'=>'new Date(\''.date('Y-m-d\TH:i:s',$no).'\')', 'y'=>(int)$data->temp];
+                $g1[] = [(int) ($no."000"), (int)$data->temp];
         }
         $graph1 = str_replace(['"new', ')"'],['new', ')'],json_encode($g1,JSON_UNESCAPED_SLASHES));
 
@@ -43,7 +43,7 @@ class Temperature extends Presenter implements Presenters
         $g2=[];
         foreach($this->data as $no => $data){
             if($data->temp != "NAN")
-                $g2[] = ['x'=>'new Date(\''.date('Y-m-d\TH:i:s',$no).'\')', 'y'=>(int)$data->humid];
+                $g2[] = [(int) ($no."000"), (int)$data->humid];
         }
         $graph2 = str_replace(['"new', ')"'],['new', ')'],json_encode($g2,JSON_UNESCAPED_SLASHES));
 

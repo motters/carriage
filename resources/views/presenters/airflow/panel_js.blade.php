@@ -1,28 +1,50 @@
 <script>
     $(document).ready(function () {
-        var graph1 = [{
-            label: "Air Flow",
-            fillColor: "rgba(38, 185, 154, 0.31)", //rgba(220,220,220,0.2)
-            strokeColor: "rgba(38, 185, 154, 0.7)", //rgba(220,220,220,1)
-            pointColor: "rgba(38, 185, 154, 0.7)", //rgba(220,220,220,1)
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: {!! $data[1] !!}
-        }];
-
-        new Chart(document.getElementById("a{{ $moduleId }}").getContext("2d")).Scatter(graph1, {
-            responsive: true,
-            showScale: true,
-            scaleBeginAtZero: true,
-            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-
-            bezierCurve: true,
-            showTooltips: true,
-            scaleShowHorizontalLines: true,
-            scaleShowLabels: true,
-            scaleType: "date",
-            scaleLabel: "<%=value%> "
+        $('#a-{{ $moduleId }}').highcharts({
+            title: {
+                text: 'Air Flow Readings',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'Air Flow Module',
+                x: -20
+            },
+            yAxis: {
+                title: {
+                    text: 'Air Flow'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            credits: {
+                enabled: false
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    month: '%e. %b',
+                    year: '%b'
+                },
+                title: {
+                    text: 'Date'
+                }
+            },
+            tooltip: {
+                valueSuffix: 'G'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'Air Flow',
+                data: {!! $data[1] !!}
+            }]
         });
 
         $('#{{ $api.$moduleId }}').removeClass('active');

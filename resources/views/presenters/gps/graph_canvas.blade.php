@@ -16,5 +16,5 @@
     <button class="btn btn-success">Download All Data</button>
 
     <h3>GPS Location</h3>
-        <div id="map" style="border: 2px solid #3872ac;"></div>
+    <div id="map" style="border: 2px solid #3872ac;"></div>
 </div>
