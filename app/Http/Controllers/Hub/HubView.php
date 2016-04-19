@@ -39,6 +39,7 @@ class HubView extends \App\Http\Controllers\Controller
         // Cache the data
         $exists = Storage::disk('local')->has($findme.'.txt');
 
+        // Check if file exists
         if(!$exists){
             return Redirect::back()->withError('No data has been cached yet.');
         }
@@ -55,6 +56,7 @@ class HubView extends \App\Http\Controllers\Controller
      */
     public function cache($findme)
     {
+        // Get the identification data
         $findmeExplode = explode('$', $findme);
 
         // Get payload data
@@ -63,10 +65,13 @@ class HubView extends \App\Http\Controllers\Controller
         // Cache the data
         $exists = Storage::disk('local')->has($findme.'.txt');
 
+        // If the module payload field has no data then return with error
         if($module->payload == "{}")
             return Redirect::back()->withError('There is not data to cache.');
 
+        // Does the file exists
         if(!$exists) {
+            // Create the file and add the data
             Storage::disk('local')->put($findme . '.txt', $module->payload);
         }else{
             // Get file content
@@ -81,7 +86,7 @@ class HubView extends \App\Http\Controllers\Controller
             Storage::disk('local')->put($findme.'.txt', json_encode($newData));
         }
 
-        // Delete real view data
+        // Delete data payload field in DB
         $module->payload = "{}";
         $module->save();
 
