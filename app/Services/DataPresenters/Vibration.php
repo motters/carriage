@@ -57,8 +57,8 @@ class Vibration extends Presenter implements Presenters
         $graphs[1] = $graph1;
         $graphs[2] = $graph2;
         $graphs[3] = $graph3;
-        $graphs['first'] = $firstTime;
-        $graphs['last'] = $lastTime;
+        //$graphs['first'] = $firstTime;
+        //$graphs['last'] = $lastTime;
 
         return $graphs;
 

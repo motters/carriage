@@ -32,7 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('hubs/{id}/api', 'Hub\Hub@updateAPISettings');
     Route::put('hubs/{id}/hardware', 'Hub\Hub@updateHardwareSetup');
     Route::delete('hubs/{id}', 'Hub\Hub@delete');
-
+    Route::get('hubs/module/{id}/cache', 'Hub\HubView@cache');
+    Route::get('hubs/module/{id}/download', 'Hub\HubView@download');
 
     // Users
     Route::get('users', 'Users\User@index');
